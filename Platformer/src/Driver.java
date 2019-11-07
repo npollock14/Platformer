@@ -27,30 +27,49 @@ public class Driver extends JPanel
 	int frame = 0;
 	int pScore = 0, eScore = 0;
 	double startTime = 0;
+	Point mPos;
 	boolean paused = false;
-	
-	
+	Player p;
+	Shape square;
+	Shape line;
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		
-
+		p.draw(g);
 	}
 
 	public void update() throws InterruptedException {
+		p.update(getMousePos(), keys);
 	}
 
 	private void init() {
+		int sW = 30;
+		Rect s1 = new Rect(0, 0, 30, 30);
+		Rect s2 = new Rect(30, 0, 30, 30);
+		Rect s3 = new Rect(30, 30, 30, 30);
+		Rect s4 = new Rect(0, 30, 30, 30);
+		ArrayList<Rect> sq = new ArrayList<Rect>();
+		sq.add(s1);
+		sq.add(s2);
+		sq.add(s3);
+		sq.add(s4);
+		square = new Shape(sq);
 
+		p = new Player(new Point(500, 600), 0, square);
 	}
-	
-	
-	
 
 	private int randSign() {
 		return (Math.random() > .5 ? 1 : -1);
+	}
+
+	public Point getMousePos() {
+		try {
+			return new Point(this.getMousePosition().x, this.getMousePosition().y);
+		} catch (Exception e) {
+			return mPos;
+		}
 	}
 
 	// ==================code above ===========================
