@@ -8,7 +8,7 @@ public class Shape {
 	boolean init;
 	Vec2[] explosionVelocities;
 	Vec2 expVel;
-
+//hello
 	public Shape(int boundWidth, int... positions) {
 		super();
 		if (positions.length % 2 != 0) {
