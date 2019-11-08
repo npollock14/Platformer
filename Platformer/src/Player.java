@@ -36,7 +36,6 @@ public class Player {
 		} catch (Exception e) {
 
 		}
-		move();
 		if(keys[37] && !keysHeld[37]) {
 			if(shape == 0) {
 				shape = shapes.size()-1;
@@ -66,8 +65,10 @@ public class Player {
 			changeShape();
 		}
 		
-		if(keys[68]) {
+		if(dead) {
 			shapes.get(shape)[rotation].destroyed = true;
+		}else {
+			move();
 		}
 		
 		

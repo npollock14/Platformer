@@ -73,5 +73,16 @@ public class Shape {
 		}
 		return false;
 	}
+	public boolean intersects(Shape s) {
+		for (Rect re : bounds) {
+			for(Rect r : s.bounds) {
+				if (re.intersects(r)) {
+				return true;
+			}
+			}
+			
+		}
+		return false;
+	}
 
 }
