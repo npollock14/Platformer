@@ -54,7 +54,10 @@ public class Player {
 			}
 			changeShape();
 		}
-		
+		if(keys[32] && !keysHeld[32]) {
+			shapes.get(shape).rotate();
+			changeShape();
+		}
 		
 		
 	}

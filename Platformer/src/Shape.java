@@ -17,6 +17,16 @@ public void move(Vec2 vel) {
 	}
 	
 }
+public void rotate() {
+	for(Rect r : bounds) {
+		double x = r.pos.x;
+		r.pos.x = r.pos.y;
+		r.pos.y = x;
+	}
+//	double x = pos.x;
+//	pos.x = pos.y;
+//	pos.y = pos.x;
+}
 public void setPosition(Point pos) {
 	double deltaX = pos.x - this.pos.x;
 	double deltaY = pos.y - this.pos.y;
