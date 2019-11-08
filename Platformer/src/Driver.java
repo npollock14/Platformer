@@ -31,16 +31,19 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
+	Obstacle o;
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		p.draw(g);
+		o.draw(g);
 	}
 
 	public void update() throws InterruptedException {
 		p.update(getMousePos(), keys, keysHeld);
+		o.update(p);
 
 		for (int i = 0; i < keysHeld.length; i++) {
 			if (keys[i]) {
@@ -62,6 +65,12 @@ public class Driver extends JPanel
 				new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1), new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
 
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
+
+		ArrayList<Shape> obstacles = new ArrayList<Shape>();
+		obstacles.add(new Shape(shapeWidth + 20, 0, 0, 1, 0, 2, 0, 3, 0, 0, 1, 0, 2, 3, 1, 3, 2));
+
+		o = new Obstacle(new Point(0, 0), new Vec2(0, 2), obstacles);
+
 	}
 
 	private int randSign() {

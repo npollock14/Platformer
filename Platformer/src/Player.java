@@ -66,7 +66,7 @@ public class Player {
 		}
 		
 		if(dead) {
-			shapes.get(shape)[rotation].destroyed = true;
+			shapes.get(shape)[rotation].setDestroyed(true, vel);
 		}else {
 			move();
 		}
