@@ -24,7 +24,7 @@ public class Player {
 		shapes.get(shape).draw(g);
 	}
 
-	public void update(Point mPos, boolean[] keys) {
+	public void update(Point mPos, boolean[] keys, boolean[] keysHeld) {
 		try {
 			if (pos.distanceTo(mPos) > 1) {
 				vel.x = (mPos.x - pos.x) / 10;
@@ -36,24 +36,23 @@ public class Player {
 
 		}
 		move();
-		
-		if(keys[37]) {
+		if(keys[37] && !keysHeld[37]) {
 			if(shape == 0) {
-				shape = 6;
+				shape = shapes.size()-1;
 			}
 			else {
 				shape --;
-				changeShape();
 			}
+			changeShape();
 		}
-		if(keys[39]) {
-			if(shape == 6) {
+		if(keys[39] && !keysHeld[39]) {
+			if(shape == shapes.size() - 1) {
 				shape = 0;
 			}
 			else {
 				shape ++;
-				changeShape();
 			}
+			changeShape();
 		}
 		
 		

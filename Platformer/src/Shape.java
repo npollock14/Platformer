@@ -22,6 +22,8 @@ public void setPosition(Point pos) {
 	double deltaY = pos.y - this.pos.y;
 	
 	move(new Vec2(deltaX,deltaY));
+	
+	//System.out.println("Moved " + deltaX + " " + deltaY);
 }
 public void draw(Graphics g) {
 	for(Rect r : bounds) {

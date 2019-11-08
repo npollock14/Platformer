@@ -23,6 +23,7 @@ public class Driver extends JPanel
 	int screenHeight = 1000;
 	boolean[] keys = new boolean[300];
 	boolean[] keysToggled = new boolean[300];
+	boolean[] keysHeld = new boolean[300];
 	boolean[] mouse = new boolean[200];
 	int frame = 0;
 	int pScore = 0, eScore = 0;
@@ -41,23 +42,49 @@ public class Driver extends JPanel
 	}
 
 	public void update() throws InterruptedException {
-		p.update(getMousePos(), keys);
+		p.update(getMousePos(), keys, keysHeld);
+		
+		
+		for(int i = 0; i<keysHeld.length; i++) {
+			if(keys[i]) {
+				keysHeld[i] = true;
+			}else {
+				keysHeld[i] = false;
+			}
+			
+		}
 	}
 
 	private void init() {
 		int sW = 30;
-		Rect s1 = new Rect(0, 0, 30, 30);
-		Rect s2 = new Rect(30, 0, 30, 30);
-		Rect s3 = new Rect(30, 30, 30, 30);
-		Rect s4 = new Rect(0, 30, 30, 30);
+		Rect s1 = new Rect(0, 0, sW, sW);
+		Rect s2 = new Rect(sW, 0, sW, sW);
+		Rect s3 = new Rect(sW, sW, sW, sW);
+		Rect s4 = new Rect(0, sW, sW, sW);
 		ArrayList<Rect> sq = new ArrayList<Rect>();
 		sq.add(s1);
 		sq.add(s2);
 		sq.add(s3);
 		sq.add(s4);
-		square = new Shape(sq, new Point(30,30));
+		square = new Shape(sq, new Point(sW,sW));
+		
+		int lW = 30;
+		Rect l1 = new Rect(0, 0, lW, lW);
+		Rect l2 = new Rect(0, lW, lW, lW);
+		Rect l3 = new Rect(0, lW*2, lW, lW);
+		Rect l4 = new Rect(0, lW*3, lW, lW);
+		ArrayList<Rect> lineBounds = new ArrayList<Rect>();
+		lineBounds.add(l1);
+		lineBounds.add(l2);
+		lineBounds.add(l3);
+		lineBounds.add(l4);
+		line = new Shape(lineBounds, new Point(15,60));
+		
+		
+		
+		
 
-		p = new Player(new Point(500, 600), 0, square);
+		p = new Player(new Point(500, 600), 0, square, line);
 	}
 
 	private int randSign() {
