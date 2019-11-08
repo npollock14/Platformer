@@ -69,7 +69,7 @@ public class Driver extends JPanel
 		ArrayList<Shape> obstacles = new ArrayList<Shape>();
 		obstacles.add(new Shape(shapeWidth + 20, 0, 0, 1, 0, 2, 0, 3, 0, 0, 1, 0, 2, 3, 1, 3, 2));
 
-		o = new Obstacle(new Point(0, 0), new Vec2(0, 2), obstacles);
+		o = new Obstacle(new Point(0, 0), new Vec2(0, 3), obstacles);
 
 	}
 

@@ -18,8 +18,9 @@ public class Obstacle {
 			if(p.shapes.get(p.shape)[p.rotation].intersects(s)) {
 				p.dead = true;
 			}
-
-			//
+			if(p.shapes.get(p.shape)[p.rotation].getBottom() < this.s.getBottom()) {
+				s.setDestroyed(true, vel);
+			}
 			
 		}
 	}

@@ -84,4 +84,5 @@ public class Player {
 		shapes.get(shape)[rotation].move(vel);
 
 	}
+	
 }

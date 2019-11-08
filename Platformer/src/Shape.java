@@ -83,5 +83,14 @@ public class Shape {
 		}
 		return false;
 	}
+	public double getBottom() {
+		double low = this.bounds.get(0).pos.y + this.bounds.get(0).h;
+		for(int i = 1; i<this.bounds.size(); i++) {
+			if(this.bounds.get(i).pos.y + this.bounds.get(i).h > low) {
+				low = this.bounds.get(i).pos.y + this.bounds.get(i).h;
+			}
+		}
+		return low;
+	}
 
 }
