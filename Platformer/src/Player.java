@@ -44,6 +44,7 @@ public class Player {
 			else {
 				shape --;
 			}
+			rotation = 0;
 			changeShape();
 		}
 		if(keys[39] && !keysHeld[39]) {
@@ -53,6 +54,7 @@ public class Player {
 			else {
 				shape ++;
 			}
+			rotation = 0;
 			changeShape();
 		}
 		if(keys[32] && !keysHeld[32]) {
@@ -64,10 +66,15 @@ public class Player {
 			changeShape();
 		}
 		
+		if(keys[68]) {
+			shapes.get(shape)[rotation].destroyed = true;
+		}
+		
 		
 	}
 
 	private void changeShape() {
+		
 		shapes.get(shape)[rotation].setPosition(pos);
 	}
 
