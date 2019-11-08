@@ -32,11 +32,14 @@ for(int i = 0; i< positions.length-1; i+=2) {
 		}
 		for (int i = 0; i < w; i ++) {
 			for(int j = 0; j < h; j++) {
+				boolean valid = true;
 				for(Point p : positionsToSubtract) {
-					if(!p.isSame(new Point(i,j))) {
-						bounds.add(new Rect(i * boundWidth, j * boundWidth, boundWidth, boundWidth));
+					if(p.isSame(new Point(i,j))) {
+						valid = false;
+						break;
 					}
 				}
+				if(valid) bounds.add(new Rect(i * boundWidth, j * boundWidth, boundWidth, boundWidth));
 			}
 		}
 		this.pos = new Point(0, 0);
