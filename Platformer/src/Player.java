@@ -9,14 +9,14 @@ public class Player {
 	int shape;
 	boolean dead;
 
-	public Player(Point pos, int shape, Shape... shapes) {
+	public Player(Point playerPos, int shape, Shape... shapes) {
 		super();
 		for(int i = 0; i < shapes.length; i++) {
 		this.shapes.add(shapes[i]);
 		}
 		this.shape = shape;
+		this.pos = playerPos;
 		changeShape();
-		this.pos = pos;
 		this.vel = new Vec2(0, 0);
 	}
 
@@ -61,7 +61,7 @@ public class Player {
 	}
 
 	private void changeShape() {
-		shapes.get(shape).pos = pos;
+		shapes.get(shape).setPosition(pos);
 	}
 
 	private void move() {

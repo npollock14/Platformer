@@ -55,7 +55,7 @@ public class Driver extends JPanel
 		sq.add(s2);
 		sq.add(s3);
 		sq.add(s4);
-		square = new Shape(sq);
+		square = new Shape(sq, new Point(30,30));
 
 		p = new Player(new Point(500, 600), 0, square);
 	}
@@ -92,6 +92,9 @@ public class Driver extends JPanel
 	}
 
 	public Driver() {
+		
+		init();
+		
 		JFrame f = new JFrame();
 		f.setTitle("Pong... Again");
 		f.setSize(screenWidth, screenHeight);
@@ -104,7 +107,7 @@ public class Driver extends JPanel
 
 		f.add(this);
 
-		init();
+		
 
 		t = new Timer(15, this);
 		t.start();
