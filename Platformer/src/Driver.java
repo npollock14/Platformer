@@ -31,8 +31,6 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
-	Shape square;
-	Shape line;
 
 	// ============== end of settings ==================
 
@@ -43,48 +41,27 @@ public class Driver extends JPanel
 
 	public void update() throws InterruptedException {
 		p.update(getMousePos(), keys, keysHeld);
-		
-		
-		for(int i = 0; i<keysHeld.length; i++) {
-			if(keys[i]) {
+
+		for (int i = 0; i < keysHeld.length; i++) {
+			if (keys[i]) {
 				keysHeld[i] = true;
-			}else {
+			} else {
 				keysHeld[i] = false;
 			}
-			
+
 		}
 	}
 
 	private void init() {
-		int sW = 30;
-		Rect s1 = new Rect(0, 0, sW, sW);
-		Rect s2 = new Rect(sW, 0, sW, sW);
-		Rect s3 = new Rect(sW, sW, sW, sW);
-		Rect s4 = new Rect(0, sW, sW, sW);
-		ArrayList<Rect> sq = new ArrayList<Rect>();
-		sq.add(s1);
-		sq.add(s2);
-		sq.add(s3);
-		sq.add(s4);
-		square = new Shape(sq, new Point(sW,sW));
-		
-		int lW = 30;
-		Rect l1 = new Rect(0, 0, lW, lW);
-		Rect l2 = new Rect(0, lW, lW, lW);
-		Rect l3 = new Rect(0, lW*2, lW, lW);
-		Rect l4 = new Rect(0, lW*3, lW, lW);
-		ArrayList<Rect> lineBounds = new ArrayList<Rect>();
-		lineBounds.add(l1);
-		lineBounds.add(l2);
-		lineBounds.add(l3);
-		lineBounds.add(l4);
-		line = new Shape(lineBounds, new Point(15,60));
-		
-		
-		
-		
+		int shapeWidth = 30;
+		Shape[] squares = { new Shape(shapeWidth, 0, 0, 1, 0, 1, 1, 0, 1) };
+		Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3),
+				new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
+		Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
+				new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3),
+				new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1), new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
 
-		p = new Player(new Point(500, 600), 0, square, line);
+		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 	}
 
 	private int randSign() {
@@ -119,9 +96,9 @@ public class Driver extends JPanel
 	}
 
 	public Driver() {
-		
+
 		init();
-		
+
 		JFrame f = new JFrame();
 		f.setTitle("Pong... Again");
 		f.setSize(screenWidth, screenHeight);
@@ -133,8 +110,6 @@ public class Driver extends JPanel
 		f.addMouseListener(this);
 
 		f.add(this);
-
-		
 
 		t = new Timer(15, this);
 		t.start();

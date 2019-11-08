@@ -3,16 +3,17 @@ import java.util.ArrayList;
 
 public class Player {
 	Vec2 vel = new Vec2(0,0);
-	ArrayList<Shape> shapes = new ArrayList<Shape>();
+	ArrayList<Shape[]> shapes = new ArrayList<Shape[]>();
 	int health;
 	Point pos;
-	int shape;
+	int shape = 0;
+	int rotation = 0;
 	boolean dead;
 
-	public Player(Point playerPos, int shape, Shape... shapes) {
+	public Player(Point playerPos, int shape, Shape[]... shapes) {
 		super();
 		for(int i = 0; i < shapes.length; i++) {
-		this.shapes.add(shapes[i]);
+				this.shapes.add(shapes[i]);
 		}
 		this.shape = shape;
 		this.pos = playerPos;
@@ -21,7 +22,7 @@ public class Player {
 	}
 
 	public void draw(Graphics g) {
-		shapes.get(shape).draw(g);
+		shapes.get(shape)[rotation].draw(g);
 	}
 
 	public void update(Point mPos, boolean[] keys, boolean[] keysHeld) {
@@ -55,7 +56,11 @@ public class Player {
 			changeShape();
 		}
 		if(keys[32] && !keysHeld[32]) {
-			shapes.get(shape).rotate();
+			if(rotation < shapes.get(shape).length-1) {
+				rotation ++;
+			}else {
+				rotation = 0;
+			}
 			changeShape();
 		}
 		
@@ -63,12 +68,12 @@ public class Player {
 	}
 
 	private void changeShape() {
-		shapes.get(shape).setPosition(pos);
+		shapes.get(shape)[rotation].setPosition(pos);
 	}
 
 	private void move() {
 		pos.add(vel);
-		shapes.get(shape).move(vel);
+		shapes.get(shape)[rotation].move(vel);
 
 	}
 }

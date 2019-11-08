@@ -5,10 +5,15 @@ public class Shape {
 ArrayList<Rect> bounds = new ArrayList<Rect>();
 Point pos;
 
-public Shape(ArrayList<Rect> bounds, Point pos) {
+public Shape(int boundWidth, int... positions) {
 	super();
-	this.bounds = bounds;
-	this.pos = pos;
+	if(positions.length % 2 != 0) {
+		throw new IllegalArgumentException("Boi, give points");
+	}
+	for(int i = 0; i < positions.length-1; i+=2) {
+		bounds.add(new Rect(positions[i]*boundWidth, positions[i+1]*boundWidth, boundWidth, boundWidth));
+	}
+	this.pos = new Point(0,0);
 }
 public void move(Vec2 vel) {
 	this.pos.add(vel);
@@ -23,6 +28,7 @@ public void rotate() {
 		r.pos.x = r.pos.y;
 		r.pos.y = x;
 	}
+	setPosition(pos);
 //	double x = pos.x;
 //	pos.x = pos.y;
 //	pos.y = pos.x;
