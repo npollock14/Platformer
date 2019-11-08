@@ -67,9 +67,9 @@ public class Driver extends JPanel
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 
 		ArrayList<Shape> obstacles = new ArrayList<Shape>();
-		obstacles.add(new Shape(shapeWidth + 20, 0, 0, 1, 0, 2, 0, 3, 0, 0, 1, 0, 2, 3, 1, 3, 2));
+		obstacles.add(new Shape(20,5,40.0f, 5,4, 5,3));
 
-		o = new Obstacle(new Point(0, 0), new Vec2(0, 3), obstacles);
+		o = new Obstacle(new Point(0, 0), new Vec2(0, 1), obstacles);
 
 	}
 
@@ -223,6 +223,9 @@ class Point {
 	public void add(Vec2 v) {
 		this.x += v.x;
 		this.y += v.y;
+	}
+	public boolean isSame(Point p) {
+		return p.x == this.x && p.y == this.y;
 	}
 }
 

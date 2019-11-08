@@ -19,6 +19,28 @@ public class Shape {
 		}
 		this.pos = new Point(0, 0);
 	}
+	public Shape(int w, int h, float boundWidth, int... positions) {
+		super();
+		ArrayList<Point> positionsToSubtract = new ArrayList<Point>(); 
+		if (positions.length % 2 != 0) {
+			throw new IllegalArgumentException("Boi, give points");
+		}else {
+
+for(int i = 0; i< positions.length-1; i+=2) {
+	positionsToSubtract.add(new Point(positions[i], positions[i+1]));
+}
+		}
+		for (int i = 0; i < w; i ++) {
+			for(int j = 0; j < h; j++) {
+				for(Point p : positionsToSubtract) {
+					if(!p.isSame(new Point(i,j))) {
+						bounds.add(new Rect(i * boundWidth, j * boundWidth, boundWidth, boundWidth));
+					}
+				}
+			}
+		}
+		this.pos = new Point(0, 0);
+	}
 
 	public void move(Vec2 vel) {
 		this.pos.add(vel);
