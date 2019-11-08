@@ -18,6 +18,8 @@ public class Obstacle {
 			if(p.shapes.get(p.shape)[p.rotation].intersects(s)) {
 				p.dead = true;
 			}
+
+			//
 			
 		}
 	}
