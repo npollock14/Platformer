@@ -36,9 +36,9 @@ public class Driver extends JPanel
 	Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
 			new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3), new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1),
 			new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
-	Shape lineCutOut = new Shape(25, 5, (float)shapeWidth, 13, 4, 13, 3, 13, 2, 13, 1);
-	Shape squareCutOut = new Shape(25, 5, (float)shapeWidth, 5, 4, 6, 4, 5, 3, 6, 3);
-	Shape lCutOut = new Shape(25, 5, (float)shapeWidth, 3, 4, 3, 3, 3, 2, 2, 4);
+	Shape lineCutOut = new Shape(25, 5, (float)shapeWidth + 2, 13, 4, 13, 3, 13, 2, 13, 1);
+	Shape squareCutOut = new Shape(25, 5, (float)shapeWidth+ 2, 5, 4, 6, 4, 5, 3, 6, 3);
+	Shape lCutOut = new Shape(25, 5, (float)shapeWidth+ 2, 3, 4, 3, 3, 3, 2, 2, 4);
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
@@ -250,7 +250,7 @@ class Point {
 	}
 
 	public boolean inside(Rect r) {
-		return (x > r.pos.x && x < r.pos.x + r.w && y > r.pos.y && y < r.pos.y + r.h);
+		return (x >= r.pos.x && x <= r.pos.x + r.w && y >= r.pos.y && y <= r.pos.y + r.h);
 	}
 
 	public void add(Vec2 v) {

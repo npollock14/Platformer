@@ -16,6 +16,7 @@ public class Obstacle {
 		s.setPosition(pos);
 	}
 	public void update(Player p) {
+		if(!destroyed) {
 			s.move(vel);
 			if(p.shapes.get(p.shape)[p.rotation].intersects(s)) {
 				p.dead = true;
@@ -23,6 +24,7 @@ public class Obstacle {
 			if(p.shapes.get(p.shape)[p.rotation].getBottom() < this.s.getBottom() && !p.dead) {
 				destroyed = true;
 			}
+		}
 			
 	}
 	public void draw(Graphics g) {
