@@ -42,6 +42,8 @@ public class Driver extends JPanel
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
+	
+	int enemysFaced = 0;
 
 	// ============== end of settings ==================
 
@@ -58,6 +60,7 @@ public class Driver extends JPanel
 
 		if (activeObstacles.size() < 1) {
 			//Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
+			enemysFaced ++;
 			Obstacle o = getNewObstacle(obstacles);
 			
 			activeObstacles.add(o);
@@ -79,7 +82,7 @@ public class Driver extends JPanel
 
 	private Obstacle getNewObstacle(ArrayList<Obstacle> templates) {
 		Obstacle o = templates.get((int)(Math.random() * templates.size()));
-		return new Obstacle(new Point(0,0),new Vec2(0,3), o.s, o.shapes);
+		return new Obstacle(new Point(0,-5*50),new Vec2(0,2 + (enemysFaced*.2)), o.s, o.shapes);
 		
 	}
 

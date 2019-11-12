@@ -26,6 +26,7 @@ public class Player {
 	}
 
 	public void update(Point mPos, boolean[] keys, boolean[] keysHeld) {
+		if(!dead) {
 		try {
 			if (pos.distanceTo(mPos) > 1) {
 				vel.x = (mPos.x - pos.x) / 10;
@@ -64,7 +65,7 @@ public class Player {
 			}
 			changeShape();
 		}
-		
+		}
 		if(dead) {
 			
 			//do dead stuff
@@ -76,7 +77,7 @@ public class Player {
 		
 	}
 
-	private void changeShape() {
+	public void changeShape() {
 		
 		shapes.get(shape)[rotation].setPosition(pos);
 	}
