@@ -21,7 +21,7 @@ public class Obstacle {
 			int newX = ((int)(pos.x / 50)) * 50;
 			int newY = ((int)(pos.y / 50)) * 50;
 			s.setPosition(new Point(newX,newY));
-			if(p.shapes.get(p.shape)[p.rotation].intersects(s, 1.0f)) {
+			if(p.shapes.get(p.shape)[p.rotation].intersects(s,0.0f)) {
 				p.dead = true;
 			}
 			if(p.shapes.get(p.shape)[p.rotation].getBottom() <= this.s.getBottom() && !p.dead) {

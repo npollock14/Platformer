@@ -32,13 +32,14 @@ public class Driver extends JPanel
 	float shapeWidth = 50.0f;
 	float shapeHeight = 50.0f;
 	float obstacleWidth = 50.0f;
-	Shape[] squares = { new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 1, 1, 0, 1) };
-	Shape[] lines = { new Shape(shapeWidth, shapeHeight, 0, 0, 0, 1, 0, 2, 0, 3),
-			new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 2, 0, 3, 0) };
-	Shape[] lShapes = { new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 2, 0, 2, 1),
-			new Shape(shapeWidth, shapeHeight, -1, -1, -1, -2, -1, -3, 0, -3),
-			new Shape(shapeWidth, shapeHeight, -1, 0, -2, 0, -3, 0, -3, -1),
-			new Shape(shapeWidth, shapeHeight, 0, 0, 0, 1, 0, 2, -1, 2) };
+	float feather = .001f;
+	Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 1, 1, 0, 1) };
+	Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 0, 1, 0, 2, 0, 3),
+			new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 2, 0, 3, 0) };
+	Shape[] lShapes = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 2, 0, 2, 1),
+			new Shape(shapeWidth, shapeHeight,feather, -1, -1, -1, -2, -1, -3, 0, -3),
+			new Shape(shapeWidth, shapeHeight,feather, -1, 0, -2, 0, -3, 0, -3, -1),
+			new Shape(shapeWidth, shapeHeight,feather, 0, 0, 0, 1, 0, 2, -1, 2) };
 	Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth, 13, 4, 13, 3, 13, 2, 13, 1);
 	Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth, 5, 4, 6, 4, 5, 3, 6, 3);
 	Shape lCutOut = new Shape(25, 5, (float) obstacleWidth, 3, 4, 3, 3, 3, 2, 2, 4);
@@ -51,6 +52,7 @@ public class Driver extends JPanel
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
+		g.drawRect(0, 0, screenWidth, screenHeight);
 		super.paintComponent(g);
 		p.draw(g);
 		for (Obstacle o : activeObstacles) {
@@ -258,7 +260,6 @@ class Point {
 		if (feather.length > 1) {
 			throw new IllegalArgumentException();
 		} else if (feather.length == 1) {
-			System.out.println(x + " " + r.pos.x + feather[0]);
 			return (x > r.pos.x + feather[0] && x + feather[0] < r.pos.x + r.w && y > r.pos.y + feather[0]
 					&& y + feather[0] < r.pos.y + r.h);
 
