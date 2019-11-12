@@ -69,6 +69,7 @@ public class Player {
 	public void changeShape() {
 		
 		shapes.get(shape)[rotation].setPosition(pos);
+		
 	}
 
 	private void move(Point mPos) {
