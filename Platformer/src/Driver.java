@@ -33,17 +33,17 @@ public class Driver extends JPanel
 	float shapeHeight = 50.0f;
 	float obstacleWidth = 50.0f;
 	float feather = 1f;
-	Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 1, 1, 0, 1) };
-	Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 0, 1, 0, 2, 0, 3),
-			new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 2, 0, 3, 0) };
-	Shape[] lShapes = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 2, 0, 2, 1),
-			new Shape(shapeWidth, shapeHeight,feather, -1, -1, -1, -2, -1, -3, 0, -3),
-			new Shape(shapeWidth, shapeHeight,feather, -1, 0, -2, 0, -3, 0, -3, -1),
-			new Shape(shapeWidth, shapeHeight,feather, 0, 0, 0, 1, 0, 2, -1, 2) };
-	Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth, 13, 4, 13, 3, 13, 2, 13, 1);
-	Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth, 5, 4, 6, 4, 5, 3, 6, 3);
-	Shape lCutOut = new Shape(25, 5, (float) obstacleWidth, 3, 4, 3, 3, 3, 2, 2, 4);
-	Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth, 6, 4, 6, 3, 6, 2, 5, 4);
+	Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather,null, 0, 0, 1, 0, 1, 1, 0, 1) };
+	Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather,null, 0, 0, 0, 1, 0, 2, 0, 3),
+			new Shape(shapeWidth, shapeHeight,feather,null, 0, 0, 1, 0, 2, 0, 3, 0) };
+	Shape[] lShapes = { new Shape(shapeWidth, shapeHeight,feather,null, 0, 0, 1, 0, 2, 0, 2, 1),
+			new Shape(shapeWidth, shapeHeight,feather,null, -1, -1, -1, -2, -1, -3, 0, -3),
+			new Shape(shapeWidth, shapeHeight,feather,null, -1, 0, -2, 0, -3, 0, -3, -1),
+			new Shape(shapeWidth, shapeHeight,feather,null, 0, 0, 0, 1, 0, 2, -1, 2) };
+	Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth,null, 13, 4, 13, 3, 13, 2, 13, 1);
+	Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth,null, 5, 4, 6, 4, 5, 3, 6, 3);
+	Shape lCutOut = new Shape(25, 5, (float) obstacleWidth,null, 3, 4, 3, 3, 3, 2, 2, 4);
+	Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth,null, 6, 4, 6, 3, 6, 2, 5, 4);
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();

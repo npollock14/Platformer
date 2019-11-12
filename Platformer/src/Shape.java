@@ -1,11 +1,12 @@
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Shape {
 	ArrayList<Rect> bounds = new ArrayList<Rect>();
 	Point pos;
 
-	public Shape(float boundWidth, float boundHeight, float feather, int... positions) {
+	public Shape(float boundWidth, float boundHeight, float feather, BufferedImage[] images, int... positions) {
 		super();
 		if (positions.length % 2 != 0) {
 			throw new IllegalArgumentException("Sets of 2 points needed");
@@ -19,7 +20,7 @@ public class Shape {
 		this.setPosition(pos);
 	}
 
-	public Shape(int w, int h, float boundWidth, int... positions) {
+	public Shape(int w, int h, float boundWidth, BufferedImage[] images, int... positions) {
 		super();
 		ArrayList<Point> positionsToSubtract = new ArrayList<Point>();
 		if (positions.length % 2 != 0) {

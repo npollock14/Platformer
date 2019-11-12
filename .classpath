@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Platformer/src"/>
+	<classpathentry kind="lib" path="Res"/>
 	<classpathentry kind="output" path="Platformer/bin"/>
 </classpath>
