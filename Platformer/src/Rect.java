@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Rect {
@@ -19,6 +20,7 @@ public class Rect {
 	}
 
 	public void draw(Graphics g) {
-		g.drawRect((int) pos.x, (int) pos.y, (int) w, (int) h);
+		g.setColor(Color.black);
+		g.fillRect((int) pos.x, (int) pos.y, (int) w, (int) h);
 	}
 }

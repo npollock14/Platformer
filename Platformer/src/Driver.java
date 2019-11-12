@@ -32,7 +32,7 @@ public class Driver extends JPanel
 	float shapeWidth = 50.0f;
 	float shapeHeight = 50.0f;
 	float obstacleWidth = 50.0f;
-	float feather = .001f;
+	float feather = 1f;
 	Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 1, 1, 0, 1) };
 	Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather, 0, 0, 0, 1, 0, 2, 0, 3),
 			new Shape(shapeWidth, shapeHeight,feather, 0, 0, 1, 0, 2, 0, 3, 0) };
@@ -43,6 +43,7 @@ public class Driver extends JPanel
 	Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth, 13, 4, 13, 3, 13, 2, 13, 1);
 	Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth, 5, 4, 6, 4, 5, 3, 6, 3);
 	Shape lCutOut = new Shape(25, 5, (float) obstacleWidth, 3, 4, 3, 3, 3, 2, 2, 4);
+	Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth, 6, 4, 6, 3, 6, 2, 5, 4);
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
@@ -110,6 +111,7 @@ public class Driver extends JPanel
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut, 1));
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), squareCutOut, 0));
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut, 2));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut2, 2));
 
 	}
 
