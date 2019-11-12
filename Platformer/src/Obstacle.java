@@ -31,8 +31,5 @@ public class Obstacle {
 	public void draw(Graphics g) {
 		s.draw(g);
 	}
-	public Obstacle getCopy() {
-		return new Obstacle(this.vel, this.s, this.shapes);
-	}
 	
 }

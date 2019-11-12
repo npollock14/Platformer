@@ -30,6 +30,16 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
+	int shapeWidth = 30;
+	Shape[] squares = { new Shape(shapeWidth, 0, 0, 1, 0, 1, 1, 0, 1) };
+	Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3),
+			new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
+	Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
+			new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3),
+			new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1), new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
+	Shape lineCutOut = new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1);
+	Shape squareCutOut = new Shape(25, 5, 50.0f, 5, 4, 6, 4, 5, 3, 6, 3);
+
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
 
@@ -47,8 +57,8 @@ public class Driver extends JPanel
 		p.update(getMousePos(), keys, keysHeld);
 
 		if (activeObstacles.size() < 1) {
-			Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
-			activeObstacles.add(o);
+			//Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
+			activeObstacles.add(new Obstacle(new Vec2(0, 3), new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1), lines));
 			System.out.println("Added");
 		}
 
@@ -77,18 +87,8 @@ public class Driver extends JPanel
 	}
 
 	private void init() {
-		int shapeWidth = 30;
-		Shape[] squares = { new Shape(shapeWidth, 0, 0, 1, 0, 1, 1, 0, 1) };
-		Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3),
-				new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
-		Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
-				new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3),
-				new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1), new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
-
+		
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
-
-		Shape lineCutOut = new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1);
-		Shape squareCutOut = new Shape(25, 5, 50.0f, 5, 4, 6, 4, 5, 3, 6, 3);
 
 		obstacles.add(new Obstacle(new Vec2(0, 3), lineCutOut, lines));
 		obstacles.add(new Obstacle(new Vec2(0, 3), squareCutOut, squares));
