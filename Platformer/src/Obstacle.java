@@ -5,12 +5,14 @@ public class Obstacle {
 	Point pos;
 	Vec2 vel;
 	Shape s;
-	public Obstacle(Point pos, Vec2 vel, ArrayList<Shape> shapes) {
+	Shape[] shapes;
+	int deadTicks = 0;
+	public Obstacle(Vec2 vel, Shape shape, Shape[] shapes) {
 		super();
-		this.pos = pos;
+		this.pos = new Point(0,0);
 		this.vel = vel;
-		int shape = (int) (Math.random() * shapes.size());
-		this.s = shapes.get(shape);
+		this.s = shape;
+		this.shapes = shapes;
 	}
 	public void update(Player p) {
 		if(!s.getDestroyed()) {
@@ -22,11 +24,15 @@ public class Obstacle {
 				s.setDestroyed(true, vel);
 			}
 			
+		}else {
+			deadTicks++;
 		}
 	}
 	public void draw(Graphics g) {
 		s.draw(g);
 	}
-	
+	public Obstacle getCopy() {
+		return new Obstacle(this.vel, this.s, this.shapes);
+	}
 	
 }

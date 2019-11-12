@@ -30,20 +30,42 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
-	Obstacle o;
+	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		p.draw(g);
-		o.draw(g);
+		for (Obstacle o : activeObstacles) {
+			o.draw(g);
+		}
 	}
 
 	public void update() throws InterruptedException {
 		p.update(getMousePos(), keys, keysHeld);
-		o.update(p);
 
+		if (activeObstacles.size() < 1) {
+			Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
+			activeObstacles.add(o);
+			System.out.println("Added");
+		}
+
+		for (int i = 0; i < activeObstacles.size(); i++) {
+			if (activeObstacles.get(i).deadTicks > 60) {
+				activeObstacles.remove(i);
+				System.out.println("Removed");
+				continue;
+			}
+			activeObstacles.get(i).update(p);
+
+		}
+
+		updateKeysHeld();
+	}
+
+	private void updateKeysHeld() {
 		for (int i = 0; i < keysHeld.length; i++) {
 			if (keys[i]) {
 				keysHeld[i] = true;
@@ -65,10 +87,11 @@ public class Driver extends JPanel
 
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 
-		ArrayList<Shape> obstacles = new ArrayList<Shape>();
-		obstacles.add(new Shape(25,5,50.0f, 13,4, 13,3, 13,2,13,1));
+		Shape lineCutOut = new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1);
+		Shape squareCutOut = new Shape(25, 5, 50.0f, 5, 4, 6, 4, 5, 3, 6, 3);
 
-		o = new Obstacle(new Point(0, 0), new Vec2(0, 3), obstacles);
+		obstacles.add(new Obstacle(new Vec2(0, 3), lineCutOut, lines));
+		obstacles.add(new Obstacle(new Vec2(0, 3), squareCutOut, squares));
 
 	}
 
@@ -223,6 +246,7 @@ class Point {
 		this.x += v.x;
 		this.y += v.y;
 	}
+
 	public boolean isSame(Point p) {
 		return p.x == this.x && p.y == this.y;
 	}
