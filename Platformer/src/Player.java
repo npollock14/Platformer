@@ -78,11 +78,11 @@ public class Player {
 		}catch (Exception e) {
 			
 		}
-		pos.x = ((int)(pos.x / 52) * 52) + 1;
-		pos.y = ((int)(pos.y / 52) * 52) + 1;
+		pos.x = ((int)(pos.x / 50) * 50);
+		pos.y = ((int)(pos.y / 50) * 50);
 		shapes.get(shape)[rotation].setPosition(mPos);
-		int newX = ((int)(shapes.get(shape)[rotation].pos.x / 52) * 52) + 1;
-		int newY = ((int)(shapes.get(shape)[rotation].pos.y / 52) * 52) + 1;
+		int newX = ((int)(shapes.get(shape)[rotation].pos.x / 50) * 50);
+		int newY = ((int)(shapes.get(shape)[rotation].pos.y / 50) * 50);
 		shapes.get(shape)[rotation].setPosition(new Point(newX,newY));
 		
 	}

@@ -66,13 +66,23 @@ for(int i = 0; i< positions.length-1; i+=2) {
 		}
 	}
 
-	public boolean intersects(Rect r) {
-		for (Rect re : bounds) {
-			if (re.intersects(r)) {
-				return true;
+	public boolean intersects(Rect r, float... feather) {
+		if(feather.length > 1) {
+			throw new IllegalArgumentException("1 Feather");
+		}else if(feather.length == 1) {
+			for (Rect re : bounds) {
+				if (re.intersects(r), feather[0]) {
+					return true;
+				}
 			}
-		}
+		}else {
+			for (Rect re : bounds) {
+				if (re.intersects(r)) {
+					return true;
+				}
+			}
 		return false;
+		}
 	}
 	public boolean intersects(Shape s) {
 		for (Rect re : bounds) {

@@ -17,11 +17,16 @@ public class Obstacle {
 	}
 	public void update(Player p) {
 		if(!destroyed) {
-			s.move(vel);
-			if(p.shapes.get(p.shape)[p.rotation].intersects(s)) {
+			pos.add(vel);
+			System.out.println("POS: " + pos.x + " " + pos.y);
+			int newX = ((int)(pos.x / 50)) * 50;
+			int newY = ((int)(pos.y / 50)) * 50;
+			s.setPosition(new Point(newX,newY));
+			System.out.println(s.pos.x + " " + s.pos.y);
+			if(p.shapes.get(p.shape)[p.rotation].intersects(s), 1.0f) {
 				p.dead = true;
 			}
-			if(p.shapes.get(p.shape)[p.rotation].getBottom() < this.s.getBottom() && !p.dead) {
+			if(p.shapes.get(p.shape)[p.rotation].getBottom() <= this.s.getBottom() && !p.dead) {
 				destroyed = true;
 			}
 		}
