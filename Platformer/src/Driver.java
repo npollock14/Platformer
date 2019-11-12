@@ -58,12 +58,14 @@ public class Driver extends JPanel
 
 		if (activeObstacles.size() < 1) {
 			//Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
-			activeObstacles.add(new Obstacle(new Vec2(0, 3), new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1), lines));
+			Obstacle o = getNewObstacle(obstacles);
+			
+			activeObstacles.add(o);
 			System.out.println("Added");
 		}
 
 		for (int i = 0; i < activeObstacles.size(); i++) {
-			if (activeObstacles.get(i).deadTicks > 60) {
+			if (activeObstacles.get(i).destroyed) {
 				activeObstacles.remove(i);
 				System.out.println("Removed");
 				continue;
@@ -73,6 +75,12 @@ public class Driver extends JPanel
 		}
 
 		updateKeysHeld();
+	}
+
+	private Obstacle getNewObstacle(ArrayList<Obstacle> templates) {
+		Obstacle o = templates.get((int)(Math.random() * templates.size()));
+		return new Obstacle(new Point(0,0),new Vec2(0,3), o.s, o.shapes);
+		
 	}
 
 	private void updateKeysHeld() {
@@ -90,8 +98,8 @@ public class Driver extends JPanel
 		
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 
-		obstacles.add(new Obstacle(new Vec2(0, 3), lineCutOut, lines));
-		obstacles.add(new Obstacle(new Vec2(0, 3), squareCutOut, squares));
+		obstacles.add(new Obstacle(new Point(0,0), new Vec2(0, 3), lineCutOut, lines));
+		obstacles.add(new Obstacle(new Point(0,0), new Vec2(0, 3), squareCutOut, squares));
 
 	}
 

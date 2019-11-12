@@ -2,13 +2,13 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Player {
-	Vec2 vel = new Vec2(0,0);
+	Vec2 vel;
 	ArrayList<Shape[]> shapes = new ArrayList<Shape[]>();
-	int health;
 	Point pos;
 	int shape = 0;
 	int rotation = 0;
 	boolean dead;
+	Shape current;
 
 	public Player(Point playerPos, int shape, Shape[]... shapes) {
 		super();
@@ -66,7 +66,9 @@ public class Player {
 		}
 		
 		if(dead) {
-			shapes.get(shape)[rotation].setDestroyed(true, vel);
+			
+			//do dead stuff
+			
 		}else {
 			move();
 		}

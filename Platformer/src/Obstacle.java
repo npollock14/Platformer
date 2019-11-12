@@ -6,27 +6,24 @@ public class Obstacle {
 	Vec2 vel;
 	Shape s;
 	Shape[] shapes;
-	int deadTicks = 0;
-	public Obstacle(Vec2 vel, Shape shape, Shape[] shapes) {
+	boolean destroyed;
+	public Obstacle(Point pos, Vec2 vel, Shape shape, Shape[] shapes) {
 		super();
-		this.pos = new Point(0,0);
+		this.pos = pos;
 		this.vel = vel;
 		this.s = shape;
 		this.shapes = shapes;
+		s.setPosition(pos);
 	}
 	public void update(Player p) {
-		if(!s.getDestroyed()) {
 			s.move(vel);
 			if(p.shapes.get(p.shape)[p.rotation].intersects(s)) {
 				p.dead = true;
 			}
-			if(p.shapes.get(p.shape)[p.rotation].getBottom() < this.s.getBottom()) {
-				s.setDestroyed(true, vel);
+			if(p.shapes.get(p.shape)[p.rotation].getBottom() < this.s.getBottom() && !p.dead) {
+				destroyed = true;
 			}
 			
-		}else {
-			deadTicks++;
-		}
 	}
 	public void draw(Graphics g) {
 		s.draw(g);
