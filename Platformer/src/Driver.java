@@ -30,19 +30,19 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
-	int shapeWidth = 30;
+	int shapeWidth = 50;
 	Shape[] squares = { new Shape(shapeWidth, 0, 0, 1, 0, 1, 1, 0, 1) };
-	Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3),
-			new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
+	Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3), new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
 	Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
-			new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3),
-			new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1), new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
-	Shape lineCutOut = new Shape(25, 5, 50.0f, 13, 4, 13, 3, 13, 2, 13, 1);
-	Shape squareCutOut = new Shape(25, 5, 50.0f, 5, 4, 6, 4, 5, 3, 6, 3);
+			new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3), new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1),
+			new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
+	Shape lineCutOut = new Shape(25, 5, (float)shapeWidth, 13, 4, 13, 3, 13, 2, 13, 1);
+	Shape squareCutOut = new Shape(25, 5, (float)shapeWidth, 5, 4, 6, 4, 5, 3, 6, 3);
+	Shape lCutOut = new Shape(25, 5, (float)shapeWidth, 3, 4, 3, 3, 3, 2, 2, 4);
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
-	
+
 	int enemysFaced = 0;
 
 	// ============== end of settings ==================
@@ -59,18 +59,18 @@ public class Driver extends JPanel
 		p.update(getMousePos(), keys, keysHeld);
 
 		if (activeObstacles.size() < 1) {
-			//Obstacle o = obstacles.get((int) (Math.random() * obstacles.size())).getCopy();
-			enemysFaced ++;
+			enemysFaced++;
 			Obstacle o = getNewObstacle(obstacles);
-			
+
 			activeObstacles.add(o);
-			System.out.println("Added");
+			p.shape = activeObstacles.get(0).shapeID;
+			p.rotation = 0;
+			p.changeShape();
 		}
 
 		for (int i = 0; i < activeObstacles.size(); i++) {
 			if (activeObstacles.get(i).destroyed) {
 				activeObstacles.remove(i);
-				System.out.println("Removed");
 				continue;
 			}
 			activeObstacles.get(i).update(p);
@@ -81,9 +81,8 @@ public class Driver extends JPanel
 	}
 
 	private Obstacle getNewObstacle(ArrayList<Obstacle> templates) {
-		Obstacle o = templates.get((int)(Math.random() * templates.size()));
-		return new Obstacle(new Point(0,-5*50),new Vec2(0,2 + (enemysFaced*.2)), o.s, o.shapes);
-		
+		Obstacle o = templates.get((int) (Math.random() * templates.size()));
+		return new Obstacle(new Point(0, -5 * 50), new Vec2(0, 2 + (enemysFaced * .2)), o.s, o.shapeID);
 	}
 
 	private void updateKeysHeld() {
@@ -98,11 +97,12 @@ public class Driver extends JPanel
 	}
 
 	private void init() {
-		
+
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 
-		obstacles.add(new Obstacle(new Point(0,0), new Vec2(0, 3), lineCutOut, lines));
-		obstacles.add(new Obstacle(new Point(0,0), new Vec2(0, 3), squareCutOut, squares));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut, 1));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), squareCutOut, 0));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lCutOut, 2));
 
 	}
 

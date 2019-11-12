@@ -2,7 +2,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Player {
-	Vec2 vel;
 	ArrayList<Shape[]> shapes = new ArrayList<Shape[]>();
 	Point pos;
 	int shape = 0;
@@ -18,7 +17,6 @@ public class Player {
 		this.shape = shape;
 		this.pos = playerPos;
 		changeShape();
-		this.vel = new Vec2(0, 0);
 	}
 
 	public void draw(Graphics g) {
@@ -27,16 +25,7 @@ public class Player {
 
 	public void update(Point mPos, boolean[] keys, boolean[] keysHeld) {
 		if(!dead) {
-		try {
-			if (pos.distanceTo(mPos) > 1) {
-				vel.x = (mPos.x - pos.x) / 10;
-				vel.y = (mPos.y - pos.y) / 10;
-			} else {
-				vel = new Vec2(0, 0);
-			}
-		} catch (Exception e) {
-
-		}
+		
 		if(keys[37] && !keysHeld[37]) {
 			if(shape == 0) {
 				shape = shapes.size()-1;
@@ -71,7 +60,7 @@ public class Player {
 			//do dead stuff
 			
 		}else {
-			move();
+			move(mPos);
 		}
 		
 		
@@ -82,10 +71,19 @@ public class Player {
 		shapes.get(shape)[rotation].setPosition(pos);
 	}
 
-	private void move() {
-		pos.add(vel);
-		shapes.get(shape)[rotation].move(vel);
-
+	private void move(Point mPos) {
+		try {
+		pos = mPos;
+		}catch (Exception e) {
+			
+		}
+		pos.x = ((int)(pos.x / 50) * 50);
+		pos.y = ((int)(pos.y / 50) * 50);
+		shapes.get(shape)[rotation].setPosition(mPos);
+		int newX = ((int)(shapes.get(shape)[rotation].pos.x / 50) * 50);
+		int newY = ((int)(shapes.get(shape)[rotation].pos.y / 50) * 50);
+		shapes.get(shape)[rotation].setPosition(new Point(newX,newY));
+		
 	}
 	
 }

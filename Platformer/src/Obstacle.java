@@ -5,14 +5,14 @@ public class Obstacle {
 	Point pos;
 	Vec2 vel;
 	Shape s;
-	Shape[] shapes;
+	int shapeID;
 	boolean destroyed;
-	public Obstacle(Point pos, Vec2 vel, Shape shape, Shape[] shapes) {
+	public Obstacle(Point pos, Vec2 vel, Shape shape, int shapeID) {
 		super();
 		this.pos = pos;
 		this.vel = vel;
 		this.s = shape;
-		this.shapes = shapes;
+		this.shapeID = shapeID;
 		s.setPosition(pos);
 	}
 	public void update(Player p) {
