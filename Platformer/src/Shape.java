@@ -4,13 +4,13 @@ import java.util.ArrayList;
 public class Shape {
 	ArrayList<Rect> bounds = new ArrayList<Rect>();
 	Point pos;
-	public Shape(int boundWidth, int... positions) {
+	public Shape(float boundWidth, float boundHeight, int... positions) {
 		super();
 		if (positions.length % 2 != 0) {
 			throw new IllegalArgumentException("Sets of 2 points needed");
 		}
 		for (int i = 0; i < positions.length - 1; i += 2) {
-			bounds.add(new Rect(positions[i] * boundWidth, positions[i + 1] * boundWidth, boundWidth, boundWidth));
+			bounds.add(new Rect(positions[i] * boundWidth, positions[i + 1] * boundHeight, boundWidth, boundHeight));
 		}
 		this.pos = new Point(0, 0);
 		this.setPosition(pos);
@@ -51,12 +51,15 @@ for(int i = 0; i< positions.length-1; i+=2) {
 	}
 
 	public void setPosition(Point pos) {
+		try {
 		double deltaX = pos.x - this.pos.x;
 		double deltaY = pos.y - this.pos.y;
 
 		move(new Vec2(deltaX, deltaY));
+		}catch(Exception e) {
+			
+		}
 
-		// System.out.println("Moved " + deltaX + " " + deltaY);
 	}
 
 	public void draw(Graphics g) {
@@ -66,28 +69,18 @@ for(int i = 0; i< positions.length-1; i+=2) {
 		}
 	}
 
-	public boolean intersects(Rect r, float... feather) {
-		if(feather.length > 1) {
-			throw new IllegalArgumentException("1 Feather");
-		}else if(feather.length == 1) {
+	public boolean intersects(Rect r) {
 			for (Rect re : bounds) {
-				if (re.intersects(r), feather[0]) {
-					return true;
-				}
-			}
-		}else {
-			for (Rect re : bounds) {
-				if (re.intersects(r)) {
+				if (re.intersects(r, 0)) {
 					return true;
 				}
 			}
 		return false;
-		}
 	}
-	public boolean intersects(Shape s) {
+	public boolean intersects(Shape s, float feather) {
 		for (Rect re : bounds) {
 			for(Rect r : s.bounds) {
-				if (re.intersects(r)) {
+				if (re.intersects(r, feather)) {
 				return true;
 			}
 			}

@@ -75,15 +75,17 @@ public class Player {
 	private void move(Point mPos) {
 		try {
 		pos = mPos;
-		}catch (Exception e) {
-			
-		}
 		pos.x = ((int)(pos.x / 50) * 50);
 		pos.y = ((int)(pos.y / 50) * 50);
+		System.out.println(pos.x + " " + pos.y);
 		shapes.get(shape)[rotation].setPosition(mPos);
 		int newX = ((int)(shapes.get(shape)[rotation].pos.x / 50) * 50);
 		int newY = ((int)(shapes.get(shape)[rotation].pos.y / 50) * 50);
 		shapes.get(shape)[rotation].setPosition(new Point(newX,newY));
+		}catch (Exception e) {
+			
+		}
+		
 		
 	}
 	

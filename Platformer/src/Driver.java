@@ -29,15 +29,19 @@ public class Driver extends JPanel
 	Point mPos;
 	boolean paused = false;
 	Player p;
-	int shapeWidth = 50;
-	Shape[] squares = { new Shape(shapeWidth, 0, 0, 1, 0, 1, 1, 0, 1) };
-	Shape[] lines = { new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, 0, 3), new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 3, 0) };
-	Shape[] lShapes = { new Shape(shapeWidth, 0, 0, 1, 0, 2, 0, 2, 1),
-			new Shape(shapeWidth, -1, -1, -1, -2, -1, -3, 0, -3), new Shape(shapeWidth, -1, 0, -2, 0, -3, 0, -3, -1),
-			new Shape(shapeWidth, 0, 0, 0, 1, 0, 2, -1, 2) };
-	Shape lineCutOut = new Shape(25, 5, (float)shapeWidth, 13, 4, 13, 3, 13, 2, 13, 1);
-	Shape squareCutOut = new Shape(25, 5, (float)shapeWidth, 5, 4, 6, 4, 5, 3, 6, 3);
-	Shape lCutOut = new Shape(25, 5, (float)shapeWidth, 3, 4, 3, 3, 3, 2, 2, 4);
+	float shapeWidth = 50.0f;
+	float shapeHeight = 50.0f;
+	float obstacleWidth = 50.0f;
+	Shape[] squares = { new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 1, 1, 0, 1) };
+	Shape[] lines = { new Shape(shapeWidth, shapeHeight, 0, 0, 0, 1, 0, 2, 0, 3),
+			new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 2, 0, 3, 0) };
+	Shape[] lShapes = { new Shape(shapeWidth, shapeHeight, 0, 0, 1, 0, 2, 0, 2, 1),
+			new Shape(shapeWidth, shapeHeight, -1, -1, -1, -2, -1, -3, 0, -3),
+			new Shape(shapeWidth, shapeHeight, -1, 0, -2, 0, -3, 0, -3, -1),
+			new Shape(shapeWidth, shapeHeight, 0, 0, 0, 1, 0, 2, -1, 2) };
+	Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth, 13, 4, 13, 3, 13, 2, 13, 1);
+	Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth, 5, 4, 6, 4, 5, 3, 6, 3);
+	Shape lCutOut = new Shape(25, 5, (float) obstacleWidth, 3, 4, 3, 3, 3, 2, 2, 4);
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
@@ -82,10 +86,8 @@ public class Driver extends JPanel
 
 	private Obstacle getNewObstacle(ArrayList<Obstacle> templates) {
 		Obstacle o = templates.get((int) (Math.random() * templates.size()));
-		return new Obstacle(new Point(0, 0), new Vec2(0, 0), o.s, o.shapeID);
-		//-5 * 50
-		//2 + (enemysFaced * .2)
-		
+		return new Obstacle(new Point(0, -5 * 50), new Vec2(0, 2 + (enemysFaced * .2)), o.s, o.shapeID);
+
 	}
 
 	private void updateKeysHeld() {
@@ -103,8 +105,8 @@ public class Driver extends JPanel
 
 		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
 
-		//obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut, 1));
-		//obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), squareCutOut, 0));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut, 1));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), squareCutOut, 0));
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut, 2));
 
 	}
@@ -252,15 +254,18 @@ class Point {
 		return 0;
 	}
 
-	public boolean inside(Rect r, float... featherX) {
-		if(featherX.length > 1) {
-			throw new IllegalArgumentException("1 Feather Argument");
-		}else if(featherX.length == 1) {
-			return (x >= r.pos.x - featherX[0] && x - featherX[0] <= r.pos.x + r.w && y >= r.pos.y && y <= r.pos.y + r.h);
-		}else {
+	public boolean inside(Rect r, float... feather) {
+		if (feather.length > 1) {
+			throw new IllegalArgumentException();
+		} else if (feather.length == 1) {
+			System.out.println(x + " " + r.pos.x + feather[0]);
+			return (x > r.pos.x + feather[0] && x + feather[0] < r.pos.x + r.w && y > r.pos.y + feather[0]
+					&& y + feather[0] < r.pos.y + r.h);
+
+		} else {
 			return (x >= r.pos.x && x <= r.pos.x + r.w && y >= r.pos.y && y <= r.pos.y + r.h);
 		}
-		
+
 	}
 
 	public void add(Vec2 v) {
