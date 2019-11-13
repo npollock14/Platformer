@@ -35,6 +35,7 @@ public class Driver extends JPanel
 	float obstacleWidth = 50.0f;
 	float feather = 1f;
 	
+	Shape background; 
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
@@ -46,6 +47,8 @@ public class Driver extends JPanel
 	public void paint(Graphics g) {
 		g.drawRect(0, 0, screenWidth, screenHeight);
 		super.paintComponent(g);
+		background.draw(g);
+		
 		p.draw(g);
 		for (Obstacle o : activeObstacles) {
 			o.draw(g);
@@ -97,6 +100,7 @@ public class Driver extends JPanel
 
 	private void init() {
 		BufferedImage[] redTiles = {Misc.loadImage("/RedTile1.png"), Misc.loadImage("/RedTile2.png"), Misc.loadImage("/RedTile3.png")};
+		BufferedImage[] backgroundTexture = {Misc.loadImage("/BasicBackgroundBlock.png")};
 		
 		Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, 0, 1, 1, 0, 1) };
 		Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, 0, 3),
@@ -107,6 +111,7 @@ public class Driver extends JPanel
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, -1, 2) };
 		Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 13, 4, 13, 3, 13, 2, 13, 1);
 		Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 5, 4, 6, 4, 5, 3, 6, 3);
+		background = new Shape(25, 25, (float) obstacleWidth,backgroundTexture);
 		Shape lCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 3, 4, 3, 3, 3, 2, 2, 4);
 		Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth,redTiles, 6, 4, 6, 3, 6, 2, 5, 4);
 		
