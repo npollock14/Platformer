@@ -5,9 +5,19 @@ import java.util.ArrayList;
 public class Shape {
 	ArrayList<Rect> bounds = new ArrayList<Rect>();
 	Point pos;
+	BufferedImage[] images;
+	float feather = 0f;
+	int[] imageSpace;
 
 	public Shape(float boundWidth, float boundHeight, float feather, BufferedImage[] images, int... positions) {
 		super();
+		this.feather = feather;
+		this.images = images;
+		imageSpace = new int[positions.length/2];
+		for(int i = 0; i<positions.length/2; i++) {
+			imageSpace[i] = (int) (Math.random() * images.length);
+		}
+		
 		if (positions.length % 2 != 0) {
 			throw new IllegalArgumentException("Sets of 2 points needed");
 		}
@@ -20,7 +30,7 @@ public class Shape {
 		this.setPosition(pos);
 	}
 
-	public Shape(int w, int h, float boundWidth, BufferedImage[] images, int... positions) {
+	public Shape(int w, int h, float boundWidth, int... positions) {
 		super();
 		ArrayList<Point> positionsToSubtract = new ArrayList<Point>();
 		if (positions.length % 2 != 0) {
@@ -72,6 +82,11 @@ public class Shape {
 		for (Rect r : bounds) {
 			r.draw(g);
 			// System.out.println("Drawing " + r.pos.x + " " + r.pos.y );
+		}
+		if(images != null) {
+			for(int i = 0; i<bounds.size(); i++) {
+				g.drawImage(images[imageSpace[i]], (int)bounds.get(i).pos.x, (int)bounds.get(i).pos.y, (int)bounds.get(i).w, (int)bounds.get(i).h, null);
+			}
 		}
 	}
 
