@@ -39,8 +39,11 @@ public class Driver extends JPanel
 
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Obstacle> activeObstacles = new ArrayList<Obstacle>();
+	
+	ArrayList<ParticleSystem> pss = new ArrayList<ParticleSystem>();
 
 	int enemysFaced = 0;
+	
 
 	// ============== end of settings ==================
 
@@ -53,12 +56,14 @@ public class Driver extends JPanel
 		for (Obstacle o : activeObstacles) {
 			o.draw(g);
 		}
+		for(ParticleSystem ps : pss) {
+			ps.draw(g);
+		}
 		g.drawString("Player is Alive? : " + !p.dead, 0, 20);
 	}
 
 	public void update() throws InterruptedException {
 		p.update(getMousePos(), keys, keysHeld);
-
 		if (activeObstacles.size() < 1) {
 			enemysFaced++;
 			Obstacle o = getNewObstacle(obstacles);
@@ -68,13 +73,17 @@ public class Driver extends JPanel
 			p.rotation = 0;
 			p.changeShape();
 		}
+		
+		for(ParticleSystem ps : pss) {
+			ps.update(.1f);
+		}
 
 		for (int i = 0; i < activeObstacles.size(); i++) {
 			if (activeObstacles.get(i).destroyed) {
 				activeObstacles.remove(i);
 				continue;
 			}
-			activeObstacles.get(i).update(p);
+			activeObstacles.get(i).update(p, pss);
 
 		}
 

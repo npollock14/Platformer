@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Obstacle {
@@ -15,7 +16,7 @@ public class Obstacle {
 		this.shapeID = shapeID;
 		s.setPosition(pos);
 	}
-	public void update(Player p) {
+	public void update(Player p, ArrayList<ParticleSystem> pss) {
 		if(!destroyed) {
 			pos.add(vel);
 			int newX = ((int)(pos.x / 50)) * 50;
@@ -27,6 +28,9 @@ public class Obstacle {
 			if(p.shapes.get(p.shape)[p.rotation].getBottom() <= this.s.getBottom() && !p.dead) {
 				destroyed = true;
 			}
+		}else {
+			BufferedImage[] textures = { Misc.loadImage("/rock.png") };
+			pss.add(new ParticleSystem(textures, s));
 		}
 			
 	}
