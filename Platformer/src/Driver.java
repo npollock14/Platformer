@@ -100,7 +100,7 @@ public class Driver extends JPanel
 
 	private void init() {
 		BufferedImage[] redTiles = {Misc.loadImage("/RedTile1.png"), Misc.loadImage("/RedTile2.png"), Misc.loadImage("/RedTile3.png")};
-		BufferedImage[] backgroundTexture = {Misc.loadImage("/BasicBackgroundBlock.png")};
+		BufferedImage[] backgroundTexture = {Misc.loadImage("/BasicBackgroundBlock.png")};//, Misc.loadImage("/BasicBackgroundBlock2.png"), Misc.loadImage("/BasicBackgroundBlock3.png")};
 		
 		Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, 0, 1, 1, 0, 1) };
 		Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, 0, 3),
