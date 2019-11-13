@@ -101,6 +101,7 @@ public class Driver extends JPanel
 	private void init() {
 		BufferedImage[] redTiles = {Misc.loadImage("/RedTile1.png"), Misc.loadImage("/RedTile2.png"), Misc.loadImage("/RedTile3.png")};
 		BufferedImage[] backgroundTexture = {Misc.loadImage("/BasicBackgroundBlock.png")};//, Misc.loadImage("/BasicBackgroundBlock2.png"), Misc.loadImage("/BasicBackgroundBlock3.png")};
+		background = new Shape(25, 25, (float) obstacleWidth,backgroundTexture);
 		
 		Shape[] squares = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, 0, 1, 1, 0, 1) };
 		Shape[] lines = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, 0, 3),
@@ -109,20 +110,35 @@ public class Driver extends JPanel
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, -1, -1, -1, -2, -1, -3, 0, -3),
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, -1, 0, -2, 0, -3, 0, -3, -1),
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, -1, 2) };
+		Shape[] tShapes = { new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, 0, 2, 0, 1, -1),
+				new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, -1, 1, 0, 1, 1),
+				new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 1, 0, 2, 0, 1, 1),
+				new Shape(shapeWidth, shapeHeight,feather,redTiles, 1, 0, 0, -1, 0, 0, 0, 1) };
+		
 		Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 13, 4, 13, 3, 13, 2, 13, 1);
+		Shape lineCutOut2 = new Shape(25, 5, (float) obstacleWidth,redTiles, 2, 4, 3, 4, 4, 4, 5, 4);
+		
 		Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 5, 4, 6, 4, 5, 3, 6, 3);
-		background = new Shape(25, 25, (float) obstacleWidth,backgroundTexture);
+		
 		Shape lCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 3, 4, 3, 3, 3, 2, 2, 4);
 		Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth,redTiles, 6, 4, 6, 3, 6, 2, 5, 4);
 		
-		squares[0].images = redTiles;
+		Shape tCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 16, 4, 15, 4, 17, 4, 16, 3);
+		Shape tCutOut2 = new Shape(25, 5, (float) obstacleWidth,redTiles, 10, 4, 9, 4, 11, 4, 10, 3);
+		
+		p = new Player(new Point(500, 600), 0, squares, lines, lShapes, tShapes);
 
-		p = new Player(new Point(500, 600), 0, squares, lines, lShapes);
-
+		
+		
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut, 1));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), lineCutOut2, 1));
+		
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 3), squareCutOut, 0));
+		
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut, 2));
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut2, 2));
+		
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), tCutOut, 3));
 
 	}
 
