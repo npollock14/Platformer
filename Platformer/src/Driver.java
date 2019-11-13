@@ -105,10 +105,10 @@ public class Driver extends JPanel
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, -1, -1, -1, -2, -1, -3, 0, -3),
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, -1, 0, -2, 0, -3, 0, -3, -1),
 				new Shape(shapeWidth, shapeHeight,feather,redTiles, 0, 0, 0, 1, 0, 2, -1, 2) };
-		Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth, 13, 4, 13, 3, 13, 2, 13, 1);
-		Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth, 5, 4, 6, 4, 5, 3, 6, 3);
-		Shape lCutOut = new Shape(25, 5, (float) obstacleWidth, 3, 4, 3, 3, 3, 2, 2, 4);
-		Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth, 6, 4, 6, 3, 6, 2, 5, 4);
+		Shape lineCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 13, 4, 13, 3, 13, 2, 13, 1);
+		Shape squareCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 5, 4, 6, 4, 5, 3, 6, 3);
+		Shape lCutOut = new Shape(25, 5, (float) obstacleWidth,redTiles, 3, 4, 3, 3, 3, 2, 2, 4);
+		Shape lCutOut2 = new Shape(25, 5, (float) obstacleWidth,redTiles, 6, 4, 6, 3, 6, 2, 5, 4);
 		
 		squares[0].images = redTiles;
 

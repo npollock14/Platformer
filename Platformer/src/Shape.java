@@ -13,25 +13,30 @@ public class Shape {
 		super();
 		this.feather = feather;
 		this.images = images;
-		imageSpace = new int[positions.length/2];
-		for(int i = 0; i<positions.length/2; i++) {
+		imageSpace = new int[positions.length / 2];
+		for (int i = 0; i < positions.length / 2; i++) {
 			imageSpace[i] = (int) (Math.random() * images.length);
 		}
-		
+
 		if (positions.length % 2 != 0) {
 			throw new IllegalArgumentException("Sets of 2 points needed");
 		}
 		for (int i = 0; i < positions.length - 1; i += 2) {
-			bounds.add(new Rect(positions[i] * boundWidth + feather,
-					positions[i + 1] * boundHeight + feather,
+			bounds.add(new Rect(positions[i] * boundWidth + feather, positions[i + 1] * boundHeight + feather,
 					boundWidth - feather - feather, boundHeight - feather - feather));
 		}
 		this.pos = new Point(0, 0);
 		this.setPosition(pos);
 	}
 
-	public Shape(int w, int h, float boundWidth, int... positions) {
+	public Shape(int w, int h, float boundWidth,BufferedImage[] images, int... positions) {
 		super();
+		this.images = images;
+		imageSpace = new int[w * h - positions.length/2];
+		for (int i = 0; i < imageSpace.length; i++) {
+			imageSpace[i] = (int) (Math.random() * images.length);
+		}
+
 		ArrayList<Point> positionsToSubtract = new ArrayList<Point>();
 		if (positions.length % 2 != 0) {
 			throw new IllegalArgumentException("Sets of 2 points needed");
@@ -81,11 +86,12 @@ public class Shape {
 	public void draw(Graphics g) {
 		for (Rect r : bounds) {
 			r.draw(g);
-			// System.out.println("Drawing " + r.pos.x + " " + r.pos.y );
 		}
-		if(images != null) {
-			for(int i = 0; i<bounds.size(); i++) {
-				g.drawImage(images[imageSpace[i]], (int)bounds.get(i).pos.x, (int)bounds.get(i).pos.y, (int)bounds.get(i).w, (int)bounds.get(i).h, null);
+		if (images != null) {
+			for (int i = 0; i < bounds.size(); i++) {
+				g.drawImage(images[imageSpace[i]], (int) ((bounds.get(i).pos.x - feather) ),
+						(int) ((bounds.get(i).pos.y - feather) ), (int) (bounds.get(i).w + 2*feather),
+						(int) (bounds.get(i).h + 2*feather), null);
 			}
 		}
 	}
