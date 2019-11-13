@@ -139,6 +139,7 @@ public class Driver extends JPanel
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), lCutOut2, 2));
 		
 		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), tCutOut, 3));
+		obstacles.add(new Obstacle(new Point(0, 0), new Vec2(0, 0), tCutOut2, 3));
 
 	}
 
